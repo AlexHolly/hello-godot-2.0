@@ -18,9 +18,9 @@ func _on_BulletColli_body_enter( body ):
 	print(body.get_name())
 	if body.get_name().begins_with("WallColli"):
 		damage = 0
-	if body.get_name().begins_with("BrickColli"):
+	elif body.get_name().begins_with("BrickColli"):
 		body.get_parent().hit(damage)
 		damage = 0
-	if body.get_name().begins_with("PlayerColli"):
+	elif body.get_name().begins_with("PlayerColli"):
 		body.hit(damage)
 		damage = 0
