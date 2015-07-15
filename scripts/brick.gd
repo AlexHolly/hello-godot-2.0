@@ -15,7 +15,7 @@ var img = [show_2, show_1, show_0]
 func _ready():
 	item = items[randi() % items.size()]
 	randomize()
-	if !str(item).is_valid_integer():
+	if typeof(item) != TYPE_INT:
 		item = item.instance()
 		var item_colli = item.get_node(str(item.get_name(), "Colli"))
 		var item_colli_name = str(item_colli, item.get_instance_ID())
