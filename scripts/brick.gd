@@ -2,14 +2,16 @@
 extends Sprite
 
 var item_hp = preload ("res://scenes/hp.scn")
+var item_ammo = preload ("res://scenes/ammo.scn")
 
-var items = [-1, item_hp]
+var items = [-1, item_hp, item_ammo]
 
 var item = null
 
 var show_0 = preload("res://textures/stein0.png")
 var show_1 = preload("res://textures/stein1.png")
 var show_2 = preload("res://textures/stein2.png")
+
 var img = [show_2, show_1, show_0]
 
 func _ready():
@@ -18,6 +20,8 @@ func _ready():
 	if typeof(item) != TYPE_INT:
 		item = item.instance()
 		var item_colli = item.get_node(str(item.get_name(), "Colli"))
+		
+		#Make unique, solve collision problems
 		var item_colli_name = str(item_colli, item.get_instance_ID())
 		item_colli.set_name(item_colli_name)
 		item.set_global_pos(self.get_pos())
