@@ -4,7 +4,7 @@ extends Sprite
 var item_hp = preload ("res://scenes/hp.scn")
 var item_ammo = preload ("res://scenes/ammo.scn")
 
-var items = [-1, item_hp, item_ammo]
+var items = [item_hp, item_ammo]
 
 var item = null
 

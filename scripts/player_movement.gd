@@ -5,7 +5,8 @@ extends KinematicBody2D
 var speed = 100
 var ammo = 10
 var dir = Vector2(0,0)
-var last_dir = Vector2(0,0)
+var last_dir = Vector2(1,0)
+var id = 1
 
 func _ready():
 	get_node("Label").set_text(str(ammo))
@@ -13,16 +14,16 @@ func _ready():
 	
 func _handle_move(delta):
 	dir = Vector2(0, 0)
-	if Input.is_action_pressed("move_left"):
+	if Input.is_action_pressed("ui_left"):
 		dir += Vector2(-1,0)
 		last_dir = dir
-	if Input.is_action_pressed("move_right"):
+	if Input.is_action_pressed("ui_right"):
 		dir += Vector2(1,0)
 		last_dir = dir
-	if Input.is_action_pressed("move_up"):
+	if Input.is_action_pressed("ui_up"):
 		dir += Vector2(0,-1)
 		last_dir = dir
-	if Input.is_action_pressed("move_down"):
+	if Input.is_action_pressed("ui_down"):
 		dir += Vector2(0,1)
 		last_dir = dir
 	
@@ -40,13 +41,18 @@ func _fixed_process(delta):
 var bullet_class = preload("res://scenes/bullet.scn")
 
 func _handle_shoot():
-	if ammo > 0 && Input.is_action_pressed("shoot") && get_node("ShootTimer").ready:
+	if ammo > 0 && Input.is_action_pressed("ui_accept") && get_node("ShootTimer").ready:
 		add_ammo(-1)
 		var bullet = bullet_class.instance()
 		bullet.set_name(str(bullet.get_name(), bullet.get_instance_ID()))
+		
+		if(last_dir.x == 0 && last_dir.y == 0):
+			last_dir.x = 1
+			
 		var offset = get_pos() + (Vector2(25,25)*last_dir)
 		bullet.set_pos(offset)
 		bullet.dir = last_dir
+		bullet.owner = id
 		get_parent().add_child(bullet)
 		get_node("ShootTimer").ready = false
 		get_node("ShootTimer").start()
