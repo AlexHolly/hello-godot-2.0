@@ -1,4 +1,4 @@
-# HelloGodot
+# Hello Godot 2.0
 First steps in Godot 
 
 Collisions, TileSet & TileMap
